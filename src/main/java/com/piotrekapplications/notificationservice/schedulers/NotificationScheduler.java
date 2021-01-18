@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 public class NotificationScheduler {
     private final GmailService gmailService;
     private final ResourceService resourceService;
-    private final String message = "Dzień dobry,\n\nPrzypominamy o rezerwacji zasobu: %s.\nCzas " +
-            "rezerwacji upływa w ciągu %s minut.\n\nPozdrawiamy.";
+    private final String message = "Hi,\n\nWe remind you of your resource reservation: %s.\nReservation " +
+            " time expires in %s minutes.\n\nBest regards.";
     private final Set<String> notificationSent = new HashSet<>();
 
     public NotificationScheduler(GmailService gmailService, ResourceService resourceService) {
@@ -61,7 +61,7 @@ public class NotificationScheduler {
     private void sendNotification(ReservationReturn reservation) {
         try {
             gmailService.sendMessage(reservation.getAssignTo(),
-                    "Przypomnienie o rezwerwacji",
+                    "Booking reminder",
                     String.format(message,
                             reservation.getResourceName(), reservation.getRemindMinutesBefore().
                                     toMinutes()));

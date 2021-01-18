@@ -13,8 +13,8 @@ import java.util.UUID;
 public class UserAuthService {
     private final GmailService gmailService;
     private final HashMap<UUID, String> userMap = new HashMap<>();
-    private final String authMessages = "Dzień dobry,\n\ndziękujemy za założenie konta w serwise reservation tool.\n" +
-            "Żeby potwierdzić konto kliknij w link: http://www.localhost:8050/api/v1/notification/userRegister/%s\n\n Pozdrawiamy.";
+    private final String authMessages = "Hi,\n\nthank you for creating an account on the site reservation tool.\n" +
+            "To confirm the account, click on the link: http://www.localhost:8050/api/v1/notification/userRegister/%s\n\n Best regards.";
 
 
     @Autowired
@@ -26,7 +26,7 @@ public class UserAuthService {
     public void sendAuthRequest(String userMail) {
         UUID uuid = UUID.randomUUID();
         try {
-            gmailService.sendMessage(userMail,"Założenie konta w reservation-tool",String.format(authMessages,uuid));
+            gmailService.sendMessage(userMail,"Account creation in w reservation-tool",String.format(authMessages,uuid));
             userMap.put(uuid,userMail);
         } catch (MessagingException | IOException | GeneralSecurityException e) {
             e.printStackTrace();
